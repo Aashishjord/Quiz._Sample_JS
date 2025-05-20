@@ -1,5 +1,3 @@
-
-
 // For HSK Level one questions
 const question=document.getElementById("questions");//Accessign Question paragraph tag
 const buttons=document.querySelectorAll(".btn");//Accessing each answers button
@@ -28,23 +26,22 @@ const displayQn=()=>{  //Displays the Questions
     })  
 }
 
-const chooseAns=()=>{       //For choosing questions
-    const qns=QuizQn[current];
-    buttons.forEach((btn,index)=>{
-        btn.addEventListener('click',()=>{  //when we click the button it will do the following statement
-            if(index===qns.answer){   //We are checking if the index of the button is equal to the option number
-                score++;        //if the index is equal to the answer then the score will be incremented by one
-                btn.style.backgroundColor="green";
-            }
-            else{
-                btn.style.backgroundColor="red";
-                buttons[qns.answer].style.backgroundColor="green";
-                disableBtn();       //if answer is wrong it will disable all the options except next button so that we won't choose the anotheer options
+   // Attach event listeners only ONCE at startup
+buttons.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        const qns = QuizQn[current];
+        disableBtn(); // prevent further clicks
+        if (index === qns.answer) {
+            score++;
+            btn.style.backgroundColor = "green";
+        } else {
+            btn.style.backgroundColor = "red";
+            buttons[qns.answer].style.backgroundColor = "green";
+        }
+    });
+});
 
-            }
-        })
-    })
-}
+
 
 const disableBtn=()=>{   //When we choose the options and we are wrong we wont be able to click the options again
     buttons.forEach((btn)=>{
@@ -70,7 +67,8 @@ const nextQn = () => {
                 nextBtn.innerText = "Submit";// it will change the button text to submit
             }
         } else {
-           dialoge.showModal();
+           dialoge.showModal();// DIsplayes the modal that shows scoresmm
+
     scoreMsg.textContent = `You scored ${score}/${QuizQn.length}`;
     nextBtn.disabled = true;  
         
@@ -79,11 +77,11 @@ const nextQn = () => {
 };
 
 
-const closeDialoge=()=>{
+const closeDialoge=()=>{ // we have to close the dialogue when we click okay button
     okayBtn.addEventListener('click',()=>{
         dialoge.close();
     })
 }
+//All this functions are called ;
 nextQn();
-chooseAns();
 displayQn();
