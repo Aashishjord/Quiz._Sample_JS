@@ -9,13 +9,13 @@ const okayBtn=document.getElementById("OK");
 const scoreMsg=document.getElementById("msg");
 
 
-const QuizQn=[ //Questions that contains options and answers[starting with index 0] Q simply represents Questions
-    {q:"Which sentence is grammatically correct?",options:["他是学生"," 学生是他"," 是他学生","他学生是"],answer:0},
-    {q:"What does 我有一本书 mean?",options:["I have two books","I have a book","I don't have a book","This is a book"],answer:1},
-    {q:"Choose the best option. 你好吗",options:["我很好，谢谢","再见!","再见!","不客气"],answer:0},
-    {q:"What is the Chinese word for “apple”?",options:["香蕉 (xiāngjiāo)","苹果 (píngguǒ)"," 橘子(júzi)","葡萄(pútao)"],answer:1},
-    {q:"我____一个朋友.Complete the sentence",options:["有","在","是","不"],answer:0},
-]; //Contains 5 questions with options and answers
+const QuizQn = [ // Questions that contains options and answers[starting with index 0]
+    {q: "Which sentence is grammatically correct?", options: ["他是学生", "学生是他", "是他学生", "他学生是"], answer: 0},
+    {q: "What does 我有一本书 mean?", options: ["I have two books", "I don't have a book", "I have a book", "This is a book"], answer: 2},
+    {q: "Choose the best option. 你好吗？", options: ["谢谢", "我很好", "再见!", "不客气"], answer: 1},
+    {q: "What is the Chinese word for 'apple'?", options: ["香蕉 (xiāngjiāo)", "橘子(júzi)", "苹果 (píngguǒ)", "葡萄(pútao)"], answer: 2},
+    {q: "我____一个朋友. Complete the sentence", options: ["在", "和", "不", "有"], answer: 3},
+]; // Contains 5 questions with options and answers
 
 let score=0;//At first we have our score 0;
 let current=0//Current Means current question number
