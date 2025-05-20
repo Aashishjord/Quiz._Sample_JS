@@ -1,5 +1,3 @@
-
-
 // For HSK Level one questions
 const question=document.getElementById("questions");//Accessign Question paragraph tag
 const buttons=document.querySelectorAll(".btn");//Accessing each answers button
@@ -9,13 +7,13 @@ const okayBtn=document.getElementById("OK");
 const scoreMsg=document.getElementById("msg");
 
 
-const QuizQn=[ //Questions that contains options and answers[starting with index 0] Q simply represents Questions
-    {q:"Which sentence is grammatically correct?",options:["他是学生"," 学生是他"," 是他学生","他学生是"],answer:0},
-    {q:"What does 我有一本书 mean?",options:["I have two books","I have a book","I don't have a book","This is a book"],answer:1},
-    {q:"Choose the best option. 你好吗",options:["我很好，谢谢","再见!","再见!","不客气"],answer:0},
-    {q:"What is the Chinese word for “apple”?",options:["香蕉 (xiāngjiāo)","苹果 (píngguǒ)"," 橘子(júzi)","葡萄(pútao)"],answer:1},
-    {q:"我____一个朋友.Complete the sentence",options:["有","在","是","不"],answer:0},
-]; //Contains 5 questions with options and answers
+const QuizQn = [ // Questions that contains options and answers[starting with index 0]
+    {q: "Which sentence is grammatically correct?", options: ["他是学生", "学生是他", "是他学生", "他学生是"], answer: 0},
+    {q: "What does 我有一本书 mean?", options: ["I have two books", "I don't have a book", "I have a book", "This is a book"], answer: 2},
+    {q: "Choose the best option. 你好吗？", options: ["谢谢", "我很好", "再见!", "不客气"], answer: 1},
+    {q: "What is the Chinese word for 'apple'?", options: ["香蕉 (xiāngjiāo)", "橘子(júzi)", "苹果 (píngguǒ)", "葡萄(pútao)"], answer: 2},
+    {q: "我____一个朋友. Complete the sentence", options: ["在", "和", "不", "有"], answer: 3},
+]; // Contains 5 questions with options and answers
 
 let score=0;//At first we have our score 0;
 let current=0//Current Means current question number
@@ -28,23 +26,22 @@ const displayQn=()=>{  //Displays the Questions
     })  
 }
 
-const chooseAns=()=>{       //For choosing questions
-    const qns=QuizQn[current];
-    buttons.forEach((btn,index)=>{
-        btn.addEventListener('click',()=>{  //when we click the button it will do the following statement
-            if(index===qns.answer){   //We are checking if the index of the button is equal to the option number
-                score++;        //if the index is equal to the answer then the score will be incremented by one
-                btn.style.backgroundColor="green";
-            }
-            else{
-                btn.style.backgroundColor="red";
-                buttons[qns.answer].style.backgroundColor="green";
-                disableBtn();       //if answer is wrong it will disable all the options except next button so that we won't choose the anotheer options
+   // Attach event listeners only ONCE at startup
+buttons.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        const qns = QuizQn[current];
+        disableBtn(); // prevent further clicks
+        if (index === qns.answer) {
+            score++;
+            btn.style.backgroundColor = "green";
+        } else {
+            btn.style.backgroundColor = "red";
+            buttons[qns.answer].style.backgroundColor = "green";
+        }
+    });
+});
 
-            }
-        })
-    })
-}
+
 
 const disableBtn=()=>{   //When we choose the options and we are wrong we wont be able to click the options again
     buttons.forEach((btn)=>{
@@ -70,7 +67,8 @@ const nextQn = () => {
                 nextBtn.innerText = "Submit";// it will change the button text to submit
             }
         } else {
-           dialoge.showModal();
+           dialoge.showModal();// DIsplayes the modal that shows scoresmm
+
     scoreMsg.textContent = `You scored ${score}/${QuizQn.length}`;
     nextBtn.disabled = true;  
         
@@ -79,11 +77,11 @@ const nextQn = () => {
 };
 
 
-const closeDialoge=()=>{
+const closeDialoge=()=>{ // we have to close the dialogue when we click okay button
     okayBtn.addEventListener('click',()=>{
         dialoge.close();
     })
 }
+//All this functions are called ;
 nextQn();
-chooseAns();
 displayQn();
